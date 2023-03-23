@@ -8,7 +8,7 @@ export const AppHome = () => {
 
 			<Container maxWidth="xl">
 				<Typography variant="h1" component="h1" gutterBottom>
-					Welcome to the app! Use the menu above to navigate.
+					Welcome to the app! Use the menu above to navigate. This has been changed.
 				</Typography>
 			</Container>
 		</React.Fragment>
