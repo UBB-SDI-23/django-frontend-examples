@@ -1,0 +1,13 @@
+1. download NodeJS 
+    https://nodejs.org/en/download
+2. install Angular CLI 
+    npm install -g @angular/cli
+(2b. for Windows only) enable PowerShell scripts
+    Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned 
+3. create new application 
+    ng new my-app
+4. add Angular routing?
+    yes
+5. change directory to project folder
+6. srart application
+    npm run start
