@@ -14,7 +14,7 @@ if __name__ == '__main__':
     from faker import Faker
 
     fake = Faker()
-    n = 1000000
+    n = 10000
     for _ in range(n):
         Teacher.objects.create(name=fake.name(), email=fake.email(), address=fake.address())
         Course.objects.create(name=fake.name(), description=fake.text(), teacher=Teacher.objects.last())
