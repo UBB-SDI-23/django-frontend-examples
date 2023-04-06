@@ -3,7 +3,7 @@ from django.urls import path
 from rest_api.views import CoursesByAvgStudentAge, \
     CoursesByNumberOfOtherCoursesEnrolledIn, \
     StudentCourseEnrollment, CourseListCreateView, \
-    CourseDetailsUpdateDeleteView
+    CourseDetailsUpdateDeleteView, TeacherViewForAutocomplete
 
 urlpatterns = [
 
@@ -12,4 +12,5 @@ urlpatterns = [
     path("enroll/", StudentCourseEnrollment.as_view()),
     path("courses/by-avg-student-age/", CoursesByAvgStudentAge.as_view()),
     path("courses/by-other-courses-enrolled-in/", CoursesByNumberOfOtherCoursesEnrolledIn.as_view()),
+    path("teachers/autocomplete/", TeacherViewForAutocomplete.as_view()),
 ]

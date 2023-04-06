@@ -48,7 +48,7 @@ class CourseListCreateView(APIView):
     serializer_class = CourseSerializer
 
     def get(self, request, *args, **kwargs):
-        courses = Course.objects.all()
+        courses = Course.objects.all()[:100]
         serializer = CourseSerializer(courses, many=True, exclude_fields=['students'])
         return Response(serializer.data)
 
@@ -59,6 +59,19 @@ class CourseListCreateView(APIView):
             return Response(serializer.data)
         else:
             return Response({'error': 'Invalid data'}, status=status.HTTP_400_BAD_REQUEST)
+
+class TeacherViewForAutocomplete(APIView):
+    serializer_class = TeacherSerializer
+
+    def get(self, request, *args, **kwargs):
+
+        query = request.GET.get('query')
+        # TODO: leverage full text search (using a raw query if needed)
+        # for example in postgres:
+        # SELECT * FROM teacher WHERE to_tsvector(name) @@ to_tsquery(query)
+        teachers = Teacher.objects.filter(name__icontains=query).order_by('name')[:20]
+        serializer = TeacherSerializer(teachers, many=True)
+        return Response(serializer.data)
 
 class StudentCourseEnrollment(generics.CreateAPIView):
     serializer_class = CourseStudentSerializer
