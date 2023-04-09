@@ -1,6 +1,14 @@
-import { Button, Card, CardActions, CardContent, IconButton, TextField } from "@mui/material";
+import {
+	Autocomplete,
+	Button,
+	Card,
+	CardActions,
+	CardContent,
+	IconButton,
+	TextField,
+} from "@mui/material";
 import { Container } from "@mui/system";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { BACKEND_API_URL } from "../../constants";
 import { Course } from "../../models/Course";
@@ -8,6 +16,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import DeleteForeverIcon from "@mui/icons-material/DeleteForever";
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import axios from "axios";
+import { Teacher } from "../../models/Teacher";
+import { debounce } from "lodash";
 
 export const CourseAdd = () => {
 	const navigate = useNavigate();
@@ -18,6 +28,28 @@ export const CourseAdd = () => {
 		teacher_id: 1, // TODO: also read the teacher_id from the form (NOT from the user!)
 	});
 
+	const [teachers, setTeachers] = useState<Teacher[]>([]);
+
+	const fetchSuggestions = async (query: string) => {
+		try {
+			const response = await axios.get<Teacher[]>(
+				`${BACKEND_API_URL}/teachers/autocomplete?query=${query}`
+			);
+			const data = await response.data;
+			setTeachers(data);
+		} catch (error) {
+			console.error("Error fetching suggestions:", error);
+		}
+	};
+
+	const debouncedFetchSuggestions = useCallback(debounce(fetchSuggestions, 500), []);
+
+	useEffect(() => {
+		return () => {
+			debouncedFetchSuggestions.cancel();
+		};
+	}, [debouncedFetchSuggestions]);
+
 	const addCourse = async (event: { preventDefault: () => void }) => {
 		event.preventDefault();
 		try {
@@ -25,6 +57,14 @@ export const CourseAdd = () => {
 			navigate("/courses");
 		} catch (error) {
 			console.log(error);
+		}
+	};
+
+	const handleInputChange = (event: any, value: any, reason: any) => {
+		console.log("input", value, reason);
+
+		if (reason === "input") {
+			debouncedFetchSuggestions(value);
 		}
 	};
 
@@ -51,6 +91,21 @@ export const CourseAdd = () => {
 							fullWidth
 							sx={{ mb: 2 }}
 							onChange={(event) => setCourse({ ...course, description: event.target.value })}
+						/>
+
+						<Autocomplete
+							id="teacher_id"
+							options={teachers}
+							getOptionLabel={(option) => `${option.name} - ${option.email}`}
+							renderInput={(params) => <TextField {...params} label="Teacher" variant="outlined" />}
+							filterOptions={(x) => x}
+							onInputChange={handleInputChange}
+							onChange={(event, value) => {
+								if (value) {
+									console.log(value);
+									setCourse({ ...course, teacher_id: value.id });
+								}
+							}}
 						/>
 
 						<Button type="submit">Add Course</Button>
