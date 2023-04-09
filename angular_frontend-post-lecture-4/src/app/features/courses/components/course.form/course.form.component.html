@@ -1,0 +1,15 @@
+<form (ngSubmit)="formSubmit.emit(course)">
+    <mat-form-field appearance="fill">
+        <mat-label>Name</mat-label>
+        <input matInput name="name" [(ngModel)]="course.name">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Description</mat-label>
+        <input matInput name="description" [(ngModel)]="course.description">
+    </mat-form-field>
+    <mat-form-field appearance="fill">
+        <mat-label>Teacher id</mat-label>
+        <input matInput name="teacherId" type="number" [(ngModel)]="course.teacher_id">
+    </mat-form-field>
+    <button mat-button mat-flat-button color="primary" type="submit">Confirm</button>
+</form>

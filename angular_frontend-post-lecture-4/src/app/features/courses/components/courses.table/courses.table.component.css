@@ -1,0 +1,19 @@
+app-courses-table table {
+    width: 100%;
+}
+
+app-courses-table table tr th {
+    text-align: left;
+}
+
+app-courses-table table tr th, app-courses-table table tr td {
+    border: 1px solid gray;
+}
+
+app-courses-table table mat-icon {
+    vertical-align: middle;
+}
+
+app-courses-table table .action {
+    padding: 0 0.5rem;
+}

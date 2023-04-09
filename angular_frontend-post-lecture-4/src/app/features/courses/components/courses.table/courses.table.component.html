@@ -1,0 +1,24 @@
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Teacher name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let course of courses">
+            <td>{{course.id}}</td>
+            <td>{{course.name}}</td>
+            <td>{{course.description}}</td>
+            <td>{{course.teacher.name}}</td>
+            <td>
+                <mat-icon fontIcon="edit" class="action" (click)="navigateToEditPage(course)"></mat-icon>
+                <mat-icon fontIcon="delete" color="warn" class="action"  (click)="deleteCourse(course)"></mat-icon>
+                <button mat-button mat-raised-button class="action"  (click)="navigateToDetailsPage(course)">See details</button>
+            </td>
+        </tr>
+    </tbody>
+</table>

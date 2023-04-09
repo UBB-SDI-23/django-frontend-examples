@@ -1,0 +1,34 @@
+.content {
+    margin: 1rem;
+}
+
+.navbar {
+    background-color: #3f51b5;
+    padding: 1rem;
+}
+
+.navbar-title {
+    font-size:24px;
+}
+
+ul, ul li {
+    display: inline-block;
+}
+
+.navbar-title, li {
+    color: white;
+}
+
+li {
+    padding-right: 1rem;
+}
+
+li a:visited {
+    color: inherit;
+}
+
+mat-icon {
+    color: white;
+    vertical-align: sub;
+    margin-right: 1rem;
+}
