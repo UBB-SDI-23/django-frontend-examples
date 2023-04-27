@@ -36,6 +36,7 @@ export const CourseAdd = () => {
 				`${BACKEND_API_URL}/teachers/autocomplete?query=${query}`
 			);
 			const data = await response.data;
+			
 			setTeachers(data);
 		} catch (error) {
 			console.error("Error fetching suggestions:", error);
