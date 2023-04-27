@@ -36,7 +36,7 @@ export const CourseAdd = () => {
 				`${BACKEND_API_URL}/teachers/autocomplete?query=${query}`
 			);
 			const data = await response.data;
-			
+
 			setTeachers(data);
 		} catch (error) {
 			console.error("Error fetching suggestions:", error);
@@ -70,7 +70,7 @@ export const CourseAdd = () => {
 	};
 
 	return (
-		<Container>
+		<Container data-testid="test-add-container">
 			<Card>
 				<CardContent>
 					<IconButton component={Link} sx={{ mr: 3 }} to={`/courses`}>
@@ -78,6 +78,7 @@ export const CourseAdd = () => {
 					</IconButton>{" "}
 					<form onSubmit={addCourse}>
 						<TextField
+							data-testid="test-name-input"
 							id="name"
 							label="Name"
 							variant="outlined"
@@ -86,6 +87,7 @@ export const CourseAdd = () => {
 							onChange={(event) => setCourse({ ...course, name: event.target.value })}
 						/>
 						<TextField
+							data-testid="test-description-input"
 							id="description"
 							label="Description"
 							variant="outlined"
@@ -95,6 +97,7 @@ export const CourseAdd = () => {
 						/>
 
 						<Autocomplete
+							data-testid="test-teacher-input"
 							id="teacher_id"
 							options={teachers}
 							getOptionLabel={(option) => `${option.name} - ${option.email}`}
@@ -109,7 +112,9 @@ export const CourseAdd = () => {
 							}}
 						/>
 
-						<Button type="submit">Add Course</Button>
+						<Button data-testid="test-add-btn" type="submit">
+							Add Course
+						</Button>
 					</form>
 				</CardContent>
 				<CardActions></CardActions>

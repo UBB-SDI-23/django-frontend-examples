@@ -36,13 +36,17 @@ export const AllCourses = () => {
 	}, []);
 
 	return (
-		<Container>
+		<Container data-testid="test-all-courses-container">
 			<h1>All courses</h1>
 
 			{loading && <CircularProgress />}
 			{!loading && courses.length === 0 && <p>No courses found</p>}
 			{!loading && (
-				<IconButton component={Link} sx={{ mr: 3 }} to={`/courses/add`}>
+				<IconButton
+					data-testid="test-add-new-course"
+					component={Link}
+					sx={{ mr: 3 }}
+					to={`/courses/add`}>
 					<Tooltip title="Add a new course" arrow>
 						<AddIcon color="primary" />
 					</Tooltip>
