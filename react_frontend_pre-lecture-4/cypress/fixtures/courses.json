@@ -1,0 +1,26 @@
+[
+    {
+        "id": 1,
+        "name": "Course 1",
+        "description": "test description",
+        "teacher_id": 1,
+        "teacher": {
+            "id": 1,
+            "name": "Teacher 1",
+            "email": "ds"
+        },
+        "students": []
+    },
+    {
+        "id": 2,
+        "name": "Course 2",
+        "description": "test description",
+        "teacher_id": 1,
+        "teacher": {
+            "id": 1,
+            "name": "Teacher 1",
+            "email": "ds"
+        },
+        "students": []
+    }
+]
